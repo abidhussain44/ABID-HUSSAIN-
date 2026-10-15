@@ -14,10 +14,33 @@
             font-family: 'Inter', sans-serif;
         }
 
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(31, 41, 55, 0.4);
+            --accent-color: #3b82f6;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
         body {
-            background-color: #0b0f19;
-            color: #f3f4f6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Mouse Move Spotlight / Shade Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.08), transparent 40%);
+            z-index: 1;
         }
 
         header {
@@ -40,6 +63,7 @@
             background: #1f2937;
             padding: 8px 12px;
             border-radius: 6px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
         nav {
@@ -49,7 +73,7 @@
         }
 
         nav a {
-            color: #9ca3af;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s;
@@ -57,12 +81,14 @@
         }
 
         nav a:hover {
-            color: #3b82f6;
+            color: var(--accent-color);
         }
 
         section {
             padding: 80px 8%;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+            z-index: 2;
         }
 
         .hero {
@@ -71,11 +97,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            background: radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
         }
 
         .tag {
-            color: #3b82f6;
+            color: var(--accent-color);
             font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -97,7 +123,7 @@
         }
 
         p {
-            color: #9ca3af;
+            color: var(--text-muted);
             max-width: 700px;
             font-size: 1.1rem;
             margin-bottom: 30px;
@@ -110,27 +136,28 @@
         }
 
         .btn {
-            background-color: #3b82f6;
+            background-color: var(--accent-color);
             color: #ffffff;
             padding: 12px 24px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 500;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
 
         .btn:hover {
             background-color: #2563eb;
+            transform: translateY(-2px);
         }
 
         .btn-outline {
             background-color: transparent;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #f3f4f6;
+            color: var(--text-main);
         }
 
         .btn-outline:hover {
-            border-color: #3b82f6;
+            border-color: var(--accent-color);
             background-color: rgba(59, 130, 246, 0.05);
         }
 
@@ -142,10 +169,16 @@
         }
 
         .card {
-            background-color: rgba(31, 41, 55, 0.4);
+            background-color: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 24px;
             border-radius: 12px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-4px);
         }
 
         .card h3 {
@@ -158,6 +191,8 @@
             padding: 40px 8%;
             color: #6b7280;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
         }
 
         @media (max-width: 768px) {
@@ -263,7 +298,7 @@
         <h2>08 Contact</h2>
         <p>Let's build something real together. Feel free to reach out for collaborations or opportunities.</p>
         <div class="btn-container" style="margin-top: 20px;">
-            <a href="mailto:your-email@example.com" class="btn">Send Email</a>
+            <a href="mailto:abidhussain@uettrip.edu.pk" class="btn">Send Email</a>
         </div>
     </section>
 
@@ -271,5 +306,14 @@
         <p>© 2026 ABID HUSSAIN — MECHANICAL ENGINEERING PORTFOLIO</p>
     </footer>
 
+    <!-- JavaScript for Mouse Move Spotlight Effect -->
+    <script>
+        const handleMouseMove = e => {
+            const { clientX, clientY } = e;
+            document.documentElement.style.setProperty('--mouse-x', `${clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${clientY}px`);
+        }
+        window.addEventListener('mousemove', handleMouseMove);
+    </script>
 </body>
 </html>
