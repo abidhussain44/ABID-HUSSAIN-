@@ -56,12 +56,6 @@
             z-index: 100;
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
         .logo {
             font-weight: 700;
             font-size: 1.2rem;
@@ -70,23 +64,6 @@
             padding: 8px 12px;
             border-radius: 6px;
             border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        /* Rotating Gear Animation CSS */
-        .gear-icon {
-            width: 26px;
-            height: 26px;
-            fill: var(--accent-color);
-            animation: rotateGear 8s linear infinite;
-        }
-
-        @keyframes rotateGear {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
         }
 
         nav {
@@ -115,12 +92,84 @@
         }
 
         .hero {
-            min-height: 80vh;
+            min-height: 85vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
             background: radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 650px;
+        }
+
+        /* Gears & Graphic Animation Styles */
+        .hero-graphic {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 350px;
+        }
+
+        .gears-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px dashed rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.05);
+        }
+
+        .gear {
+            position: absolute;
+            border: 4px dashed var(--accent-color);
+            border-radius: 50%;
+            animation: rotateGear 12s linear infinite;
+        }
+
+        .gear-large {
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            animation-direction: normal;
+        }
+
+        .gear-medium {
+            width: 100px;
+            height: 100px;
+            top: 45px;
+            right: 45px;
+            border-color: #60a5fa;
+            animation-direction: reverse;
+            animation-duration: 8s;
+        }
+
+        .gear-small {
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 50px;
+            border-color: #93c5fd;
+            animation-direction: normal;
+            animation-duration: 6s;
+        }
+
+        @keyframes rotateGear {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .tag {
@@ -130,9 +179,6 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         h1 {
@@ -221,8 +267,17 @@
             z-index: 2;
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-top: 40px;
+            }
+            .hero-graphic {
+                width: 100%;
+                justify-content: center;
+            }
+            h1 { font-size: 2.8rem; }
             nav { display: none; }
         }
     </style>
@@ -231,13 +286,7 @@
 
     <!-- Header / Navbar -->
     <header>
-        <div class="logo-container">
-            <div class="logo">AH.</div>
-            <!-- Rotating Gear SVG Icon -->
-            <svg class="gear-icon" viewBox="0 0 24 24">
-                <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
-            </svg>
-        </div>
+        <div class="logo">AH.</div>
         <nav>
             <a href="#about">About</a>
             <a href="#journey">Journey</a>
@@ -252,15 +301,22 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="tag">
-            <svg class="gear-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" /></svg>
-            Mechanical Engineering — UET Peshawar
+        <div class="hero-content">
+            <div class="tag">Mechanical Engineering — UET Peshawar</div>
+            <h1>Abid Hussain</h1>
+            <p>Mechanical Engineering student at UET Peshawar. Passionate about mechanical design, CAD, simulations, and engineering solutions.</p>
+            <div class="btn-container">
+                <a href="#projects" class="btn">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Download CV</a>
+            </div>
         </div>
-        <h1>Abid Hussain</h1>
-        <p>Mechanical Engineering student at UET Peshawar. Passionate about mechanical design, CAD, simulations, and engineering solutions.</p>
-        <div class="btn-container">
-            <a href="#projects" class="btn">View Projects</a>
-            <a href="#contact" class="btn btn-outline">Download CV</a>
+        <!-- Rotating Gears Graphic Section -->
+        <div class="hero-graphic">
+            <div class="gears-container">
+                <div class="gear gear-large"></div>
+                <div class="gear gear-medium"></div>
+                <div class="gear gear-small"></div>
+            </div>
         </div>
     </section>
 
